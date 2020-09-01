@@ -19,7 +19,7 @@ public:
     virtual ~LayerSurface();
 
     void setType(Qt::WindowType type,
-			QtWaylandClient::QWaylandWindow *transientParent) override;
+			QtWaylandClient::QWaylandWindow *transientParent);
 
 private:
 	void zwlr_layer_surface_v1_configure(uint32_t serial,

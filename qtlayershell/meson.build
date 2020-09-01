@@ -1,5 +1,5 @@
 # https://github.com/mesonbuild/meson/issues/3471
-private_modules = ['QtCore', 'QtGui', 'QtWaylandClient']
+private_modules = ['QtCore', 'QtGui', 'QtWaylandClient', 'QtXkbCommonSupport']
 private_module_includes = []
 foreach module : private_modules
 	private_module_includes += '/usr/include/qt/@0@/@1@'.format(
@@ -12,11 +12,12 @@ qt_private = include_directories(private_module_includes)
 # https://github.com/mesonbuild/meson/issues/3470
 qtlayershell_moc_args = [
 	'-I/usr/include/qt',
-	'-I/usr/include/qt/QtWaylandClient/5.10.1',
-	'-I/usr/include/qt/QtWaylandClient/5.10.1/QtWaylandClient',
+	'-I/usr/include/qt/QtWaylandClient/5.15.0',
+	'-I/usr/include/qt/QtWaylandClient/5.15.0/QtWaylandClient',
+	'-I/usr/include/qt/QtXkbCommonSupport/5.15.0',
 	'-I/usr/include/qt/QtWaylandClient',
-	'-I/usr/include/qt/QtCore/5.10.1',
-	'-I/usr/include/qt/QtCore/5.10.1/QtCore',
+	'-I/usr/include/qt/QtCore/5.15.0',
+	'-I/usr/include/qt/QtCore/5.15.0/QtCore',
 	'-I/usr/include/qt/QtCore',
 ]
 

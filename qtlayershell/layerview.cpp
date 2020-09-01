@@ -20,7 +20,8 @@ void LayerView::apply()
 			m_margin.bottom, m_margin.left);
 	m_layer_surface->set_keyboard_interactivity(m_keyboard_interactivity);
 	// Commit and roundtrip immediately
-	m_layer_surface->m_window->QtWayland::wl_surface::commit();
+	//m_layer_surface->m_window->QtWayland::wl_surface::commit();
+	m_layer_surface->m_window->commit();
 	m_layer_surface->m_window->display()->forceRoundTrip();
 }
 

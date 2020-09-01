@@ -3,6 +3,7 @@
 #include <QtLayerShell/layerview.h>
 #include <QtWaylandClient/private/qwaylandwindow_p.h>
 #include <QtWaylandClient/private/qwaylanddisplay_p.h>
+#include <QtWaylandClient/private/qwaylandscreen_p.h>
 #include <qwayland-wlr-layer-shell-unstable-v1.h>
 
 namespace QtLayerShell {
@@ -13,13 +14,13 @@ QtWayland::zwlr_layer_surface_v1 create_layer_surface(
 	// TODO: Let the user select the output
 	auto layerview = dynamic_cast<LayerView*>(window->window());
 	if (layerview != nullptr) {
-		return shell->get_layer_surface(window->object(),
-				nullptr,
+		return shell->get_layer_surface(window->wlSurface(),
+				window->waylandScreen()->output(),
 				layerview->m_layer,
 				layerview->m_layer_namespace);
 	}
-	return shell->get_layer_surface(window->object(),
-			nullptr,
+	return shell->get_layer_surface(window->wlSurface(),
+			window->waylandScreen()->output(),
 			QtWayland::zwlr_layer_shell_v1::layer_top,
 			QString::fromUtf8("qt"));
 }
@@ -61,7 +62,8 @@ void LayerSurface::zwlr_layer_surface_v1_closed()
 void LayerSurface::zwlr_layer_surface_v1_configure(uint32_t serial,
 			uint32_t width, uint32_t height)
 {
-	m_window->configure(0, width, height);
+	//m_window->configure(0, width, height);
+	m_window->resizeFromApplyConfigure(QSize(width, height));
 	ack_configure(serial);
 }
 
